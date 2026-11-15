@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neon Circuit 3D — network harness</title>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">NEON CIRCUIT <span>3D</span></div>
+      <div class="status">
+        <span id="phase-badge" class="badge">offline</span>
+        <span id="ping" class="ping">-- ms</span>
+        <span id="room-badge" class="room hidden">----</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="panel-lobby" class="panel">
+        <h1>Connect</h1>
+        <p class="note">Network harness — no 3D scene yet. Verifies lobby, roster, map and state sync.</p>
+
+        <label for="name">Call sign</label>
+        <input id="name" maxlength="16" placeholder="Racer" autocomplete="off" />
+
+        <label for="driver">Driver</label>
+        <select id="driver"></select>
+
+        <button id="create" class="primary">Create game</button>
+
+        <div class="divider"><span>or join with a code</span></div>
+        <div class="row">
+          <input id="code" inputmode="numeric" maxlength="4" placeholder="1234" autocomplete="off" />
+          <button id="join">Join</button>
+        </div>
+
+        <p id="lobby-msg" class="msg"></p>
+      </section>
+
+      <section id="panel-room" class="panel hidden">
+        <div class="room-head">
+          <div>
+            <h2>Game code</h2>
+            <div id="room-code" class="code">----</div>
+          </div>
+          <div class="map-pick">
+            <label for="map">Map (host)</label>
+            <select id="map"></select>
+          </div>
+        </div>
+
+        <ul id="players" class="players"></ul>
+
+        <div class="actions">
+          <button id="ready" class="primary">Ready up</button>
+          <button id="start" class="hidden">Start race</button>
+          <button id="leave" class="ghost">Leave</button>
+        </div>
+        <p id="room-msg" class="msg"></p>
+      </section>
+
+      <section id="panel-race" class="panel wide hidden">
+        <h2>Race state (server truth)</h2>
+        <p class="note">
+          Drive with <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>, drift with <kbd>Shift</kbd>,
+          brake with <kbd>Space</kbd>. Values below come from snapshots at 20 Hz.
+        </p>
+
+        <div class="stats">
+          <div><span>tick</span><b id="stat-tick">0</b></div>
+          <div><span>ack</span><b id="stat-ack">0</b></div>
+          <div><span>pending</span><b id="stat-pending">0</b></div>
+          <div><span>snapshots</span><b id="stat-snaps">0</b></div>
+          <div><span>map</span><b id="stat-map">-</b></div>
+        </div>
+
+        <table class="racers">
+          <thead>
+            <tr><th>Driver</th><th>Racer</th><th>X</th><th>Y</th><th>Z</th><th>Yaw</th><th>Speed</th><th>HP</th><th>Armor</th></tr>
+          </thead>
+          <tbody id="racer-rows"></tbody>
+        </table>
+
+        <button id="abort" class="ghost">Leave race</button>
+        <p id="race-msg" class="msg"></p>
+      </section>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

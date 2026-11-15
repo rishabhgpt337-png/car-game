@@ -1,0 +1,19 @@
+{
+  "name": "neon-circuit-3d",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Low-poly 3D multiplayer racing combat: authoritative Node + Socket.io server, Three.js client (rendering lands next).",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
